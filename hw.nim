@@ -4,7 +4,7 @@
 import rdstdin
 
 # C externs
-proc ptp_hw_tp1() {.importc: "ptp_hw_tp1".}
+proc ptp_hw_tp1(int_arg: int, string_arg: cstring) {.importc, header: "hw_ptp.h".}
 
 # A global counter for delay loop
 var
@@ -14,7 +14,7 @@ var
 discard readLineFromStdin "Press enter to contine: "
 
 # Emit the hw_tp1 public tracepoint
-ptp_hw_tp1()
+ptp_hw_tp1(1, "a")
 
 # Delay
 var loops = 1
@@ -23,7 +23,7 @@ for i in 1..loops:
     gInt += 1
 
 # Emit a second hw_tp1 public tracepoint
-ptp_hw_tp1()
+ptp_hw_tp1(2, "b")
 
 # We're done
 echo "done gInt=" & $gInt
