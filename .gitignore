@@ -1,5 +1,5 @@
 .*.swp
 hw
 nimcache/
-./hw.tp.c
-./hw.tp.h
+hw_tp.c
+hw_tp.h
