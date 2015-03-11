@@ -1,14 +1,31 @@
 # Makefile for lttng testing
 
+# Object files
+OBJ_FILES = \
+	nimcache/hw.o \
+	nimcache/hw_tp.o \
+	nimcache/hw_ptp.o \
+	nimcache/system.o \
+	nimcache/rdstdin.o \
+	nimcache/readline.o \
+	nimcache/rltypedefs.o \
+	nimcache/history.o \
+	nimcache/times.o \
+	nimcache/strutils.o \
+	nimcache/parseutils.o \
+
+
+LIB_FLAGS = -llttng-ust -ldl
+
 # Use gcc to link the object files and the libraries.
 # See nimcache/hw.o target below
 hw: nimcache/hw.o Makefile
-	gcc -o hw  nimcache/system.o nimcache/hw.o nimcache/hw_ptp.o nimcache/hw_tp.o nimcache/hi.o -llttng-ust -ldl
+	gcc -o hw $(OBJ_FILES) $(LIB_FLAGS)
 
 # Compile without linking (--noLinking). This is necessary because
 # I don't know how to get nim to add the "-llttng-ust" to the command line
 # when it links the file together.
-nimcache/hw.o: hw.nim hi.c hw_ptp.c hi.h hw_ptp.h hw_tp.c Makefile
+nimcache/hw.o: hw.nim hw_ptp.c hw_ptp.h hw_tp.c Makefile
 	nim c --noLinking --cincludes=. --listCmd hw.nim
 
 # Convert hw_tp.tp to "C" (i.e. .h and .c files)
