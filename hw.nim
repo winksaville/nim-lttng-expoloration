@@ -1,4 +1,5 @@
 {.compile: "./hi.c".}
+{.compile: "./hw_tp.c".}
 {.compile: "./hw_ptp.c".}
 
 proc hi() : cstring {.importc: "hi".}
