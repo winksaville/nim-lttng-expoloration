@@ -1,0 +1,5 @@
+.*.swp
+hw
+nimcache/
+./hw.tp.c
+./hw.tp.h
